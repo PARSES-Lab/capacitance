@@ -117,7 +117,7 @@ void loop() {
 
   if (analogRead(A0) > 0){
     Serial.print("Temperature sensor reading: ");
-    float temp = (analogRead(A0) / 4095.0) * (1100.0/19.5) //Sensitivity of 19.5 mV/C and max voltage of 1.1 V
+    float temp = (analogRead(A0) / 4095.0) * (1100.0/19.5); //Sensitivity of 19.5 mV/C and max voltage of 1.1 V
     Serial.println(temp);
   }
   else{
