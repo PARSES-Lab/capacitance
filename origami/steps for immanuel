@@ -1,0 +1,18 @@
+For reading the capacitance data go to ros2_ws and run the following command:
+serial: ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyACM0
+wifi: ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
+
+and then press the reset button! microros agent is created. Now open a new terminal and type:
+ros2 topic echo /micro_ros_arduino_node_wifipublisher
+
+Then open a new terminal for the vrpn client and type the following:
+ros2 launch vrpn_mocap client.launch.yaml server:=192.168.0.100 port:=3883
+
+Open a new terminal to listen the topic:
+ros2 topic echo /vrpn_mocap/Rigid_Body_09_008/pose 
+
+Open a new terminal to save them in the same rosbag file!!!
+ros2 bag record -o my_rosbag /micro_ros_arduino_node_wifipublisher /vrpn_mocap/Rigid_Body_09_008/pose
+
+then run the following python code to convert the rosbag into a csv:
+import_rosbag.py
