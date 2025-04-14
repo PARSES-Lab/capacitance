@@ -3,7 +3,8 @@ serial: ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyACM0
 wifi: ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
 
 and then press the reset button! microros agent is created. Now open a new terminal and type:
-ros2 topic echo /micro_ros_arduino_node_wifipublisher
+ros2 topic echo /micro_ros_arduino_node_wifipublisher (this is for the wifi).
+ros2 topic echo /micro_ros_arduino_node_publisher (for the serial communication).
 
 Then open a new terminal for the vrpn client and type the following:
 ros2 launch vrpn_mocap client.launch.yaml server:=192.168.0.100 port:=3883
