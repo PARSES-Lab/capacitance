@@ -13,7 +13,8 @@ Open a new terminal to listen the topic:
 ros2 topic echo /vrpn_mocap/Rigid_Body_09_008/pose 
 
 Open a new terminal to save them in the same rosbag file!!!
-ros2 bag record -o my_rosbag /micro_ros_arduino_node_wifipublisher /vrpn_mocap/Rigid_Body_09_008/pose
+ros2 bag record -o my_rosbag /micro_ros_arduino_node_wifipublisher /vrpn_mocap/Rigid_Body_09_008/pose (if you are using wifi for capacitance).
+ros2 bag record -o my_rosbag /micro_ros_arduino_node_publisher /vrpn_mocap/Rigid_Body_09_008/pose (if you are using serial).
 
 then run the following python code to convert the rosbag into a csv:
 import_rosbag.py
