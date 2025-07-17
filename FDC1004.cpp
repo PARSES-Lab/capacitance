@@ -43,8 +43,8 @@ uint16_t FDC1004::read16(uint8_t reg) {
   return value;
   }
   else{
-    Serial.print("Wrong number of bytes available: ");
-    Serial.println(Wire.available());
+    Serial.print("Wrong number of bytes available: "); //log
+    Serial.println(Wire.available()); //log
   }
   return 0;
 }
@@ -53,7 +53,7 @@ uint16_t FDC1004::read16(uint8_t reg) {
 uint8_t FDC1004::configureMeasurement(uint8_t measurement, uint8_t channel, uint8_t diffChannel, uint8_t capdac) {
     //Verify data
     if (!FDC1004_IS_MEAS(measurement) || !FDC1004_IS_CHANNEL(channel) || capdac > FDC1004_CAPDAC_MAX) {
-        Serial.println("Measurement, channel, or capdac out of bounds");
+        Serial.println("Measurement, channel, or capdac out of bounds"); //log
         return 1;
     }
 
@@ -81,7 +81,7 @@ uint8_t FDC1004::configureMeasurement(uint8_t measurement, uint8_t channel, uint
 uint8_t FDC1004::triggerMeasurement(uint8_t measurement, uint8_t rate, uint8_t measType) {
   //verify data
     if (!FDC1004_IS_MEAS(measurement) || !FDC1004_IS_RATE(rate)) {
-       Serial.println("bad trigger request");
+       Serial.println("bad trigger request"); //log
        return 1;
     }
 
@@ -95,7 +95,7 @@ uint8_t FDC1004::triggerMeasurement(uint8_t measurement, uint8_t rate, uint8_t m
 
 uint8_t FDC1004::readMeasurement(uint8_t measurement, uint16_t * value) {
     if (!FDC1004_IS_MEAS(measurement)) {
-        Serial.println("bad read request");
+        Serial.println("bad read request"); //log
         return 1;
     }
     
@@ -105,7 +105,7 @@ uint8_t FDC1004::readMeasurement(uint8_t measurement, uint16_t * value) {
     uint8_t maxDelayCount = 10;
     while ((! (fdcRegister & ( 1 << (3-measurement)))) && delayCount < maxDelayCount) {
       //confirm with FDC that measurement is complete
-      delayMicroseconds(500); 
+      delayMicroseconds(1000); 
       delayCount++;
       fdcRegister = read16(FDC_REGISTER);
     }
@@ -142,17 +142,17 @@ void FDC1004::I2CSetup(){
     int error = Wire.endTransmission();
     int I2C_timeout = 10; 
     while (I2C_timeout > 0 && error > 0){
-      Serial.print("I2C device NOT found. ");
-      Serial.println("Waiting for 5 seconds before attempting setup...");
+      Serial.print("I2C device NOT found. "); //log
+      Serial.println("Waiting for 5 seconds before attempting setup..."); //log
       delay(5000);
       I2C_timeout -= 1; 
       error = Wire.endTransmission();
     }
     if (error == 0){
-      Serial.println("FDC1004 device found");
+      Serial.println("FDC1004 device found"); //log
     }
     else{
-      Serial.print("FDC1004 device NOT found on I2C bus and timeout reached. Check board connections.");
+      Serial.print("FDC1004 device NOT found on I2C bus and timeout reached. Check board connections."); //log
     }
 }
 
@@ -174,7 +174,7 @@ void FDC1004::absoluteCapacitance(uint8_t currChan, bool measType, uint8_t * cap
     *capacitanceAbsolute = capacitanceRelative + (3.125 * (float)*capdacPtr); //converts capdac to pF
   }
   else{
-    Serial.println("Capacitance out of bounds, re-running setCAPDAC");
+    Serial.println("Capacitance out of bounds, re-running setCAPDAC"); //log
     setCAPDAC(currChan, measType, capdacPtr, readRate);
     }
 }
