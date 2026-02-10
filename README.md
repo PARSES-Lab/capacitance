@@ -2,9 +2,10 @@
 
 This library provides basic functionality for the FDC1004 Capacitance to Digital Sensor. According to the datasheet, the FDC1004 provides femto-farad precision for measuring capacitances up to 115 pF in increments of 500 aF. The .ino files in examples demonstrate reading continuous values, triggered single values for multiple channels, and differential measurements. 
 
-The breakout board provides shielded capacitance readings on four channels. Off board, each channel is shielded with a micro-coax connector (U.FL), and the shealth can be connected to either GND (for passive shielding) or SHLD (for active shielding) using a 0 $\Omega$ resistor soldered to the board. The board schematic and PCB files are included in the BreakoutBoard directory in this repository. Please see the Hardware file for more information about the breakout board design.
+The breakout board provides shielded capacitance readings on four channels via a JST PH connector (v4). The board schematic and PCB files are included in the BreakoutBoard directory in this repository. Please see the Hardware file for more information about the breakout board design.
 
 If you use this board in an academic project, please cite our work!
+
 I. A. Mensah, D. Leblebicioglu and K. L. Dorsey, "Wireless Capacitive Measurement Board for Wearable or Proprioceptive Applications," 2025 IEEE 8th International Conference on Soft Robotics (RoboSoft), Lausanne, Switzerland, 2025, pp. 1-6, doi: 10.1109/RoboSoft63089.2025.11020828.
 
 D. Leblebicioglu, I. A. Mensah, J. Allen, A. Vadivel, N. Hanson and K. L. Dorsey, "Capacitive Sensor Design for Soft Robots and Smart Garments," 2025 23rd International Conference on Solid-State Sensors, Actuators and Microsystems (Transducers), Orlando, FL, USA, 2025, pp. 414-418, doi: 10.1109/Transducers61432.2025.11110662.
